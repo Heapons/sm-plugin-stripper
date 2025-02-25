@@ -10,7 +10,7 @@ Forum thread for this plugin: https://forums.alliedmods.net/showthread.php?t=339
 
 ### Configuration
 `sourcemod/configs/stripper/global_filters.cfg` for the global config  
-`sourcemod/configs/stripper/maps/mapname.cfg` for map specific config
+`sourcemod/configs/stripper/maps/mapname.cfg` for map specific config  
 `sourcemod/configs/stripper/gamemodes/mapprefix.cfg` for gamemode specific config
 
 ### Cvars
