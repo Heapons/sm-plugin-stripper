@@ -1,0 +1,8 @@
+[Compile]
+plugins = [
+    "Stripper"
+]
+
+[[dependency]]
+url = "https://github.com/alliedmodders/sourcemod/blob/master/plugins/include/regex.inc"
+path = "."

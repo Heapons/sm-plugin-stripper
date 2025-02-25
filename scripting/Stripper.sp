@@ -8,10 +8,10 @@
 public Plugin myinfo =
 {
     name		= "Stripper:Source (SP edition)",
-    version		= "1.3.3",
+    version		= "1.3.4",
     description	= "Stripper:Source functionality in a Sourcemod plugin",
-    author		= "Original Author: BAILOPAN. Ported to SM by: tilgep. Edited by: Lerrdy, .Rushaway",
-    url			= "https://forums.alliedmods.net/showthread.php?t=339448"
+    author		= "Original Author: BAILOPAN. Ported to SM by: tilgep. Edited by: Lerrdy, .Rushaway, Heapons",
+    url			= "https://github.com/Heapons/sm-plugin-stripper"
 }
 
 enum Mode
@@ -175,6 +175,7 @@ public Action Command_Dump(int client, int args)
 
 public void OnMapInit(const char[] mapName)
 {
+    //// Map Names ////
     // Path used for logging.
     BuildPath(Path_SM, g_sLogPath, sizeof(g_sLogPath), "logs/stripper/maps/%s.log", mapName);
 
@@ -185,7 +186,7 @@ public void OnMapInit(const char[] mapName)
     BuildPath(Path_SM, file, sizeof(file), "configs/stripper/global_filters.cfg");
     ParseFile(false);
 
-    // Now parse map config
+    // Parse map config
     BuildPath(Path_SM, file, sizeof(file), "configs/stripper/maps/%s.cfg", mapName);
 
     if(!ParseFile(true) && fileLowercase.BoolValue)
@@ -196,6 +197,21 @@ public void OnMapInit(const char[] mapName)
 
         BuildPath(Path_SM, file, sizeof(file), "configs/stripper/maps/%s.cfg", file);
         ParseFile(true);
+    }
+    // Parse gamemode config
+    char mapPrefix[16];
+    if (SplitString(mapName, "_", mapPrefix, sizeof(mapPrefix)) != -1) {
+        BuildPath(Path_SM, file, sizeof(file), "configs/stripper/gamemodes/%s.cfg", mapPrefix);
+        
+        if (!ParseFile(true) && fileLowercase.BoolValue)
+        {
+            strcopy(file, sizeof(file), mapPrefix);
+            for(int i = 0; file[i]; i++)
+                file[i] = CharToLower(file[i]);
+
+            BuildPath(Path_SM, file, sizeof(file), "configs/stripper/gamemodes/%s.cfg", file);
+            ParseFile(true);
+        }
     }
 }
 
