@@ -200,19 +200,8 @@ public void OnMapInit(const char[] mapName)
     }
     // Parse gamemode config
     char mapPrefix[16];
-    if (SplitString(mapName, "_", mapPrefix, sizeof(mapPrefix)) != -1) {
-        BuildPath(Path_SM, file, sizeof(file), "configs/stripper/gamemodes/%s.cfg", mapPrefix);
-        
-        if (!ParseFile(true) && fileLowercase.BoolValue)
-        {
-            strcopy(file, sizeof(file), mapPrefix);
-            for(int i = 0; file[i]; i++)
-                file[i] = CharToLower(file[i]);
-
-            BuildPath(Path_SM, file, sizeof(file), "configs/stripper/gamemodes/%s.cfg", file);
-            ParseFile(true);
-        }
-    }
+    BuildPath(Path_SM, file, sizeof(file), "configs/stripper/gamemodes/%s.cfg", file);
+    ParseFile(true);
 }
 
 /**
