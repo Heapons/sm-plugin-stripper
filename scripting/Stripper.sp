@@ -200,8 +200,10 @@ public void OnMapInit(const char[] mapName)
     }
     // Parse gamemode config
     char mapPrefix[16];
-    BuildPath(Path_SM, file, sizeof(file), "configs/stripper/gamemodes/%s.cfg", file);
-    ParseFile(true);
+    if (SplitString(mapName, "_", mapPrefix, sizeof(mapPrefix)) != -1) {
+        BuildPath(Path_SM, file, sizeof(file), "configs/stripper/gamemodes/%s.cfg", mapPrefix);
+        ParseFile(true);
+    }
 }
 
 /**
