@@ -26,7 +26,7 @@ jobs:
         uses: rumblefrog/setup-sp@master
         with:
           version: "1.13.x"
-          version-file: ./scripting/${{ env.PLUGIN_NAME_ENV }}.sp
+          version-file: ./scripting/Stripper.sp
 
       - name: Download SourcePawn plugin dependencies
         uses: tsuza/SPDependy@v2
