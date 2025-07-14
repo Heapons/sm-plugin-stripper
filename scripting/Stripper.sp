@@ -133,7 +133,6 @@ public Action Command_Dump(int client, int args)
     if (strncmp(buf1, "workshop/", 9, false) == 0)
     {
         strcopy(buf1, sizeof(buf1), buf1[9]);
-
         int workshopID = StrContains(buf1, ".ugc", false);
         if (workshopID != -1)
             buf1[workshopID] = '\0';
@@ -186,13 +185,11 @@ public Action Command_Dump(int client, int args)
 public void OnMapInit(const char[] mapName)
 {
     // Workshop Fix
-    if (strncmp(buf1, "workshop/", 9, false) == 0)
+    if (strncmp(mapName, "workshop/", 9, false) == 0)
     {
-        strcopy(buf1, sizeof(buf1), buf1[9]);
-
-        int workshopID = StrContains(buf1, ".ugc", false);
+        int workshopID = StrContains(mapName, ".ugc", false);
         if (workshopID != -1)
-            buf1[workshopID] = '\0';
+            mapName[workshopID] = '\0';
     }
 
     //// Map Names ////
