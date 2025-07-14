@@ -8,7 +8,7 @@
 public Plugin myinfo =
 {
     name		= "Stripper:Source (SP edition)",
-    version		= "1.3.4",
+    version		= "1.3.5",
     description	= "Stripper:Source functionality in a Sourcemod plugin",
     author		= "Original Author: BAILOPAN. Ported to SM by: tilgep. Edited by: Lerrdy, .Rushaway, Heapons",
     url			= "https://github.com/Heapons/sm-plugin-stripper"
@@ -129,6 +129,16 @@ public Action Command_Dump(int client, int args)
 
     GetCurrentMap(buf1, PLATFORM_MAX_PATH);
 
+    // Workshop Fix
+    if (strncmp(buf1, "workshop/", 9, false) == 0)
+    {
+        strcopy(buf1, sizeof(buf1), buf1[9]);
+
+        int workshopID = StrContains(buf1, ".ugc", false);
+        if (workshopID != -1)
+            buf1[workshopID] = '\0';
+    }
+
     BuildPath(Path_SM, buf2, PLATFORM_MAX_PATH, "configs/stripper/dumps");
     
     if(!DirExists(buf2)) CreateDirectory(buf2, FPERM_O_READ|FPERM_O_EXEC|FPERM_G_READ|FPERM_G_EXEC|FPERM_U_READ|FPERM_U_WRITE|FPERM_U_EXEC);
@@ -175,6 +185,16 @@ public Action Command_Dump(int client, int args)
 
 public void OnMapInit(const char[] mapName)
 {
+    // Workshop Fix
+    if (strncmp(buf1, "workshop/", 9, false) == 0)
+    {
+        strcopy(buf1, sizeof(buf1), buf1[9]);
+
+        int workshopID = StrContains(buf1, ".ugc", false);
+        if (workshopID != -1)
+            buf1[workshopID] = '\0';
+    }
+
     //// Map Names ////
     // Path used for logging.
     BuildPath(Path_SM, g_sLogPath, sizeof(g_sLogPath), "logs/stripper/maps/%s.log", mapName);

@@ -8,3 +8,6 @@ release/
 plugins/
 .sourceknight
 .venv
+scripting/compile.bat
+scripting/spcomp64.exe
+scripting/compile.exe
